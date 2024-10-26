@@ -1,9 +1,26 @@
-CFLAGS += -Wall -Wextra -g3 -fsanitize=undefined,address
+CFLAGS := -Wall -Wextra -g3 -fsanitize=undefined,address
 
-all: push_swap
+NAME := push_swap
 
-push_swap: ps_main.o s_stack.o s_stack_push.o
+SRCS := ps_main.c \
+        s_stack.c s_stack_push.c s_stack_pop.c
+
+OBJS := $(SRCS:.c=.o)
+DEPS := $(OBJS:.o=.d)
+
+all: $(NAME)
+
+$(NAME): $(OBJS)
 	$(CC) $(CFLAGS) $^ -o $@
 
 clean:
-	$(RM) push_swap *.o
+	$(RM) $(OBJS) $(DEPS)
+
+fclean: clean
+	$(RM) $(NAME)
+
+re: fclean all
+
+-include $(DEPS)
+
+.PHONY: all clean fclean re

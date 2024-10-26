@@ -6,7 +6,7 @@
 /*   By: iboukhss <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/25 19:45:33 by iboukhss          #+#    #+#             */
-/*   Updated: 2024/10/25 21:29:20 by iboukhss         ###   ########.fr       */
+/*   Updated: 2024/10/26 01:55:43 by iboukhss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,17 @@ typedef struct s_stack
 t_stack	*stack_new(ptrdiff_t stack_size);
 void	stack_delete(t_stack *stack);
 bool	stack_is_full(t_stack *stack);
+bool	stack_a_is_empty(t_stack *stack);
+bool	stack_b_is_empty(t_stack *stack);
 
-void	stack_push_back_a(t_stack *stack, int value);
-void	stack_push_front_a(t_stack *stack, int value);
-void	stack_push_back_b(t_stack *stack, int value);
-void	stack_push_front_b(t_stack *stack, int value);
+void	stack_a_push_back(t_stack *stack, int value);
+void	stack_a_push_front(t_stack *stack, int value);
+void	stack_b_push_back(t_stack *stack, int value);
+void	stack_b_push_front(t_stack *stack, int value);
+
+int		stack_a_pop_back(int *out_val, t_stack *stack);
+int		stack_a_pop_front(int *out_val, t_stack *stack);
+int		stack_b_pop_back(int *out_val, t_stack *stack);
+int		stack_b_pop_front(int *out_val, t_stack *stack);
 
 #endif
