@@ -6,7 +6,7 @@
 /*   By: iboukhss <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/25 20:02:51 by iboukhss          #+#    #+#             */
-/*   Updated: 2024/10/27 15:35:37 by iboukhss         ###   ########.fr       */
+/*   Updated: 2024/10/27 18:38:12 by iboukhss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,14 +51,15 @@ typedef struct s_chunk
 typedef struct s_state
 {
 	t_stack	*stack;
-	t_chunk curr;
+	t_chunk	curr;
 	t_chunk	min;
 	t_chunk	mid;
 	t_chunk	max;
 }	t_state;
 
 // State operations
-void	state_init(t_state *state, t_stack *stack, t_position pos, ptrdiff_t len);
+void	state_init(t_state *state, t_stack *stack, t_position pos,
+			ptrdiff_t len);
 void	state_push_min(t_state *state);
 void	state_push_mid(t_state *state);
 void	state_push_max(t_state *state);

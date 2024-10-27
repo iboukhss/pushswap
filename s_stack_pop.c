@@ -6,7 +6,7 @@
 /*   By: iboukhss <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 01:12:53 by iboukhss          #+#    #+#             */
-/*   Updated: 2024/10/27 12:31:49 by iboukhss         ###   ########.fr       */
+/*   Updated: 2024/10/27 19:46:27 by iboukhss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,11 @@
 // NOTE: Very messy, handcrafted operations. When writing this performance was
 // not a concern. Readability could be improved.
 
-int	stack_a_pop_back(int *out_val, t_stack *stack)
+int	stack_pop_back_a(int *out_val, t_stack *stack)
 {
 	ptrdiff_t	move_size;
 
-	if (stack_a_is_empty(stack))
+	if (stack_is_empty_a(stack))
 	{
 		return (1);
 	}
@@ -39,11 +39,11 @@ int	stack_a_pop_back(int *out_val, t_stack *stack)
 	return (0);
 }
 
-int	stack_a_pop_front(int *out_val, t_stack *stack)
+int	stack_pop_front_a(int *out_val, t_stack *stack)
 {
 	ptrdiff_t	move_size;
 
-	if (stack_a_is_empty(stack))
+	if (stack_is_empty_a(stack))
 	{
 		return (1);
 	}
@@ -60,9 +60,9 @@ int	stack_a_pop_front(int *out_val, t_stack *stack)
 	return (0);
 }
 
-int	stack_b_pop_back(int *out_val, t_stack *stack)
+int	stack_pop_back_b(int *out_val, t_stack *stack)
 {
-	if (stack_b_is_empty(stack))
+	if (stack_is_empty_b(stack))
 	{
 		return (1);
 	}
@@ -75,11 +75,11 @@ int	stack_b_pop_back(int *out_val, t_stack *stack)
 	return (0);
 }
 
-int	stack_b_pop_front(int *out_val, t_stack *stack)
+int	stack_pop_front_b(int *out_val, t_stack *stack)
 {
 	ptrdiff_t	move_size;
 
-	if (stack_b_is_empty(stack))
+	if (stack_is_empty_b(stack))
 	{
 		return (1);
 	}

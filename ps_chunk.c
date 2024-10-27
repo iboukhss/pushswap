@@ -6,7 +6,7 @@
 /*   By: iboukhss <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 18:02:22 by iboukhss          #+#    #+#             */
-/*   Updated: 2024/10/27 12:57:24 by iboukhss         ###   ########.fr       */
+/*   Updated: 2024/10/27 18:35:07 by iboukhss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ bool	chunk_is_empty(t_chunk *chunk)
 	return (chunk->end - chunk->beg == 0);
 }
 
-int		chunk_peek(t_chunk *chunk)
+int	chunk_peek(t_chunk *chunk)
 {
 	if (chunk->pos == TOP_A || chunk->pos == TOP_B)
 	{

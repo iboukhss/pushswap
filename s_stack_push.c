@@ -6,7 +6,7 @@
 /*   By: iboukhss <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/25 20:12:25 by iboukhss          #+#    #+#             */
-/*   Updated: 2024/10/27 12:30:10 by iboukhss         ###   ########.fr       */
+/*   Updated: 2024/10/27 19:41:46 by iboukhss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 #include "string.h"
 
-void	stack_a_push_back(t_stack *stack, int value)
+void	stack_push_back_a(t_stack *stack, int value)
 {
 	ptrdiff_t	move_size;
 
@@ -30,7 +30,7 @@ void	stack_a_push_back(t_stack *stack, int value)
 	stack->end_b += 1;
 }
 
-void	stack_a_push_front(t_stack *stack, int value)
+void	stack_push_front_a(t_stack *stack, int value)
 {
 	ptrdiff_t	move_size;
 
@@ -46,7 +46,7 @@ void	stack_a_push_front(t_stack *stack, int value)
 	stack->end_b += 1;
 }
 
-void	stack_b_push_back(t_stack *stack, int value)
+void	stack_push_back_b(t_stack *stack, int value)
 {
 	if (stack_is_full(stack))
 	{
@@ -56,7 +56,7 @@ void	stack_b_push_back(t_stack *stack, int value)
 	stack->end_b += 1;
 }
 
-void	stack_b_push_front(t_stack *stack, int value)
+void	stack_push_front_b(t_stack *stack, int value)
 {
 	ptrdiff_t	move_size;
 
