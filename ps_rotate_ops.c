@@ -6,7 +6,7 @@
 /*   By: iboukhss <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 02:56:31 by iboukhss          #+#    #+#             */
-/*   Updated: 2024/10/26 03:02:46 by iboukhss         ###   ########.fr       */
+/*   Updated: 2024/10/27 11:28:22 by iboukhss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,54 +14,78 @@
 
 #include <stdio.h>
 
-void	rotate_a(t_stack *stack)
+void	rotate_a(t_state *state)
 {
-	int	val;
-	int	err;
+	int		val;
+	int		err;
+	t_chunk	*src;
+	t_chunk	*dst;
 
-	err = stack_a_pop_front(&val, stack);
+	src = chunk_at(state, TOP_A);
+	dst = chunk_at(state, BOT_A);
+	err = stack_a_pop_front(&val, state->stack);
 	if (!err)
 	{
-		stack_a_push_back(stack, val);
+		stack_a_push_back(state->stack, val);
+		src->end -= 1;
+		dst->beg -= 1;
 		puts("ra");
 	}
 }
 
-void	rotate_b(t_stack *stack)
+void	rotate_b(t_state *state)
 {
-	int	val;
-	int	err;
+	int		val;
+	int		err;
+	t_chunk	*src;
+	t_chunk	*dst;
 
-	err = stack_b_pop_front(&val, stack);
+	src = chunk_at(state, TOP_B);
+	dst = chunk_at(state, BOT_B);
+	err = stack_b_pop_front(&val, state->stack);
 	if (!err)
 	{
-		stack_b_push_back(stack, val);
+		stack_b_push_back(state->stack, val);
+		src->end -= 1;
+		dst->beg -= 1;
 		puts("rb");
 	}
 }
 
-void	reverse_rotate_a(t_stack *stack)
+void	reverse_rotate_a(t_state *state)
 {
-	int	val;
-	int	err;
+	int		val;
+	int		err;
+	t_chunk	*src;
+	t_chunk	*dst;
 
-	err = stack_a_pop_back(&val, stack);
+	src = chunk_at(state, BOT_A);
+	dst = chunk_at(state, TOP_A);
+	err = stack_a_pop_back(&val, state->stack);
 	if (!err)
 	{
-		stack_a_push_front(stack, val);
+		stack_a_push_front(state->stack, val);
+		src->beg += 1;
+		dst->end += 1;
 		puts("rra");
 	}
 }
 
-void	reverse_rotate_b(t_stack *stack)
+void	reverse_rotate_b(t_state *state)
 {
-	int	val;
-	int	err;
+	int		val;
+	int		err;
+	t_chunk	*src;
+	t_chunk	*dst;
 
-	err = stack_b_pop_back(&val, stack);
+	src = chunk_at(state, BOT_A);
+	dst = chunk_at(state, TOP_A);
+	err = stack_b_pop_back(&val, state->stack);
 	if (!err)
 	{
-		stack_b_push_front(stack, val);
+		stack_b_push_front(state->stack, val);
+		src->beg += 1;
+		dst->end += 1;
 		puts("rrb");
 	}
 }

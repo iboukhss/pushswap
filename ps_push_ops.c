@@ -6,7 +6,7 @@
 /*   By: iboukhss <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 01:01:48 by iboukhss          #+#    #+#             */
-/*   Updated: 2024/10/26 02:49:11 by iboukhss         ###   ########.fr       */
+/*   Updated: 2024/10/27 11:24:58 by iboukhss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,28 +14,42 @@
 
 #include <stdio.h>
 
-void	push_a(t_stack *stack)
-{
-	int	val;
-	int	err;
+// NOTE: Error checking could be improved.
 
-	err = stack_b_pop_front(&val, stack);
+void	push_a(t_state *state)
+{
+	int		val;
+	int		err;
+	t_chunk	*src;
+	t_chunk	*dst;
+
+	src = chunk_at(state, TOP_B);
+	dst = chunk_at(state, TOP_A);
+	err = stack_b_pop_front(&val, state->stack);
 	if (!err)
 	{
-		stack_a_push_front(stack, val);
+		stack_a_push_front(state->stack, val);
+		src->beg += 1;
+		dst->end += 1;
 		puts("pa");
 	}
 }
 
-void	push_b(t_stack *stack)
+void	push_b(t_state *state)
 {
-	int	val;
-	int	err;
+	int		val;
+	int		err;
+	t_chunk	*src;
+	t_chunk	*dst;
 
-	err = stack_a_pop_front(&val, stack);
+	src = chunk_at(state, TOP_A);
+	dst = chunk_at(state, TOP_B);
+	err = stack_a_pop_front(&val, state->stack);
 	if (!err)
 	{
-		stack_b_push_front(stack, val);
+		stack_b_push_front(state->stack, val);
+		src->end -= 1;
+		dst->beg -= 1;
 		puts("pb");
 	}
 }
