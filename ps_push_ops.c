@@ -6,7 +6,7 @@
 /*   By: iboukhss <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 01:01:48 by iboukhss          #+#    #+#             */
-/*   Updated: 2024/10/27 11:24:58 by iboukhss         ###   ########.fr       */
+/*   Updated: 2024/10/27 15:39:22 by iboukhss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,38 +18,30 @@
 
 void	push_a(t_state *state)
 {
-	int		val;
-	int		err;
-	t_chunk	*src;
-	t_chunk	*dst;
+	int	val;
+	int	err;
 
-	src = chunk_at(state, TOP_B);
-	dst = chunk_at(state, TOP_A);
 	err = stack_b_pop_front(&val, state->stack);
 	if (!err)
 	{
+		chunk_pop(state, TOP_B);
 		stack_a_push_front(state->stack, val);
-		src->beg += 1;
-		dst->end += 1;
+		chunk_push(state, TOP_A);
 		puts("pa");
 	}
 }
 
 void	push_b(t_state *state)
 {
-	int		val;
-	int		err;
-	t_chunk	*src;
-	t_chunk	*dst;
+	int	val;
+	int	err;
 
-	src = chunk_at(state, TOP_A);
-	dst = chunk_at(state, TOP_B);
 	err = stack_a_pop_front(&val, state->stack);
 	if (!err)
 	{
+		chunk_pop(state, TOP_A);
 		stack_b_push_front(state->stack, val);
-		src->end -= 1;
-		dst->beg -= 1;
+		chunk_push(state, TOP_B);
 		puts("pb");
 	}
 }

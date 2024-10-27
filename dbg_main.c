@@ -6,7 +6,7 @@
 /*   By: iboukhss <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 23:06:03 by iboukhss          #+#    #+#             */
-/*   Updated: 2024/10/27 11:43:34 by iboukhss         ###   ########.fr       */
+/*   Updated: 2024/10/27 13:53:43 by iboukhss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	stack_print(t_stack *stack)
 	printf("----+----\n");
 	ap = stack->beg_a;
 	bp = stack->beg_b;
-	while(ap < stack->end_a || bp < stack->end_b)
+	while (ap < stack->end_a || bp < stack->end_b)
 	{
 		if (ap < stack->end_a)
 			printf("%-3d |", *ap++);
@@ -47,7 +47,7 @@ void	chunk_print(t_chunk *chunk, const char *chunk_name)
 		printf("%d, ", *cp);
 		++cp;
 	}
-	printf("\n");
+	printf("\nlen : %td\n", chunk->end - chunk->beg);
 }
 
 void	state_print(t_state *state)
