@@ -6,11 +6,14 @@
 /*   By: iboukhss <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 18:09:07 by iboukhss          #+#    #+#             */
-/*   Updated: 2024/10/26 23:03:26 by iboukhss         ###   ########.fr       */
+/*   Updated: 2024/10/27 02:31:48 by iboukhss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ps_main.h"
+
+// NOTE: Countless bugs happened here. It is not the best way to go about
+// things but I don't know what else to do.
 
 static void	init_from_top_a(t_state *state, t_stack *stack, ptrdiff_t len)
 {
@@ -49,9 +52,9 @@ static void	init_from_top_b(t_state *state, t_stack *stack, ptrdiff_t len)
 	state->curr.pos = TOP_B;
 	state->min.pos = BOT_B;
 	state->mid.pos = BOT_A;
-	state->max.pos = BOT_B;
-	state->curr.beg = stack->beg_b + len;
-	state->curr.end = stack->beg_b;
+	state->max.pos = TOP_A;
+	state->curr.beg = stack->beg_b;
+	state->curr.end = stack->beg_b + len;
 	state->min.beg = stack->end_b;
 	state->min.end = stack->end_b;
 	state->mid.beg = stack->end_a;

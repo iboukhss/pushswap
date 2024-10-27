@@ -6,32 +6,36 @@
 /*   By: iboukhss <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/25 19:47:20 by iboukhss          #+#    #+#             */
-/*   Updated: 2024/10/26 01:17:35 by iboukhss         ###   ########.fr       */
+/*   Updated: 2024/10/27 01:06:17 by iboukhss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "s_stack.h"
 
 #include <stdlib.h>
+#include <string.h>
 
-t_stack	*stack_new(ptrdiff_t stack_size)
+t_stack	*stack_new(int *array, ptrdiff_t array_size)
 {
 	t_stack	*stack;
 
-	stack = malloc(sizeof(t_stack));
-	if (!stack)
+	stack = malloc(sizeof(*stack));
+	if (stack == NULL)
+	{
 		return (NULL);
-	stack->data = malloc(stack_size * sizeof(int));
-	if (!stack->data)
+	}
+	stack->data = malloc(array_size * sizeof(*stack->data));
+	if (stack->data == NULL)
 	{
 		free(stack);
 		return (NULL);
 	}
-	stack->cap = stack_size;
+	memcpy(stack->data, array, array_size * sizeof(*stack->data));
 	stack->beg_a = stack->data;
-	stack->end_a = stack->data;
-	stack->beg_b = stack->data;
-	stack->end_b = stack->data;
+	stack->end_a = stack->data + array_size;
+	stack->beg_b = stack->data + array_size;
+	stack->end_b = stack->data + array_size;
+	stack->cap = array_size;
 	return (stack);
 }
 
