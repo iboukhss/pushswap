@@ -6,7 +6,7 @@
 /*   By: iboukhss <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/25 20:02:51 by iboukhss          #+#    #+#             */
-/*   Updated: 2024/10/27 18:38:12 by iboukhss         ###   ########.fr       */
+/*   Updated: 2024/10/31 00:16:27 by iboukhss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ typedef struct s_chunk
 {
 	int			*beg;
 	int			*end;
+	ptrdiff_t	len;
 	t_position	pos;
 }	t_chunk;
 
@@ -56,6 +57,16 @@ typedef struct s_state
 	t_chunk	mid;
 	t_chunk	max;
 }	t_state;
+
+typedef struct s_sort
+{
+	int			*arr;
+	ptrdiff_t	size;
+	ptrdiff_t	pi;
+	ptrdiff_t	qi;
+	int			p;
+	int			q;
+}	t_sort;
 
 // State operations
 void	state_init(t_state *state, t_stack *stack, t_position pos,
@@ -79,5 +90,9 @@ void	rotate_a(t_state *state);
 void	rotate_b(t_state *state);
 void	reverse_rotate_a(t_state *state);
 void	reverse_rotate_b(t_state *state);
+
+// Sorting
+void	ft_quicksort(int *array, ptrdiff_t array_size);
+void	stack_qsort(t_stack *stack, int *array, ptrdiff_t array_size);
 
 #endif

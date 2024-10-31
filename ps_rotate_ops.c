@@ -6,7 +6,7 @@
 /*   By: iboukhss <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 02:56:31 by iboukhss          #+#    #+#             */
-/*   Updated: 2024/10/30 23:56:36 by iboukhss         ###   ########.fr       */
+/*   Updated: 2024/10/31 00:03:22 by iboukhss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void	rotate_a(t_state *state)
 
 	err = false;
 	err |= stack_is_empty_a(state->stack);
+	err |= chunk_is_empty(chunk_at(state, TOP_A));
 	if (!err)
 	{
 		stack_pop_front_a(&val, state->stack);
@@ -38,6 +39,7 @@ void	rotate_b(t_state *state)
 
 	err = false;
 	err |= stack_is_empty_b(state->stack);
+	err |= chunk_is_empty(chunk_at(state, TOP_B));
 	if (!err)
 	{
 		stack_pop_front_b(&val, state->stack);
@@ -55,6 +57,7 @@ void	reverse_rotate_a(t_state *state)
 
 	err = false;
 	err |= stack_is_empty_a(state->stack);
+	err |= chunk_is_empty(chunk_at(state, BOT_A));
 	if (!err)
 	{
 		stack_pop_back_a(&val, state->stack);
@@ -72,6 +75,7 @@ void	reverse_rotate_b(t_state *state)
 
 	err = false;
 	err |= stack_is_empty_b(state->stack);
+	err |= chunk_is_empty(chunk_at(state, BOT_B));
 	if (!err)
 	{
 		stack_pop_back_b(&val, state->stack);

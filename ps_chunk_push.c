@@ -6,7 +6,7 @@
 /*   By: iboukhss <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 20:15:38 by iboukhss          #+#    #+#             */
-/*   Updated: 2024/10/27 15:43:06 by iboukhss         ###   ########.fr       */
+/*   Updated: 2024/10/31 00:18:19 by iboukhss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 static void	push_to_top_a(t_state *state, t_chunk *chunk)
 {
 	chunk->end += 1;
+	chunk->len += 1;
 	chunk_at(state, BOT_A)->beg += 1;
 	chunk_at(state, BOT_A)->end += 1;
 	chunk_at(state, TOP_B)->beg += 1;
@@ -26,6 +27,7 @@ static void	push_to_top_a(t_state *state, t_chunk *chunk)
 static void	push_to_bot_a(t_state *state, t_chunk *chunk)
 {
 	chunk->end += 1;
+	chunk->len += 1;
 	chunk_at(state, TOP_B)->beg += 1;
 	chunk_at(state, TOP_B)->end += 1;
 	chunk_at(state, BOT_B)->beg += 1;
@@ -35,6 +37,7 @@ static void	push_to_bot_a(t_state *state, t_chunk *chunk)
 static void	push_to_top_b(t_state *state, t_chunk *chunk)
 {
 	chunk->end += 1;
+	chunk->len += 1;
 	chunk_at(state, BOT_B)->beg += 1;
 	chunk_at(state, BOT_B)->end += 1;
 }
@@ -43,6 +46,7 @@ static void	push_to_bot_b(t_state *state, t_chunk *chunk)
 {
 	(void)state;
 	chunk->end += 1;
+	chunk->len += 1;
 }
 
 void	chunk_push(t_state *state, t_position pos)
@@ -65,9 +69,5 @@ void	chunk_push(t_state *state, t_position pos)
 	else if (chunk->pos == BOT_B)
 	{
 		push_to_bot_b(state, chunk);
-	}
-	else
-	{
-		return ;
 	}
 }
