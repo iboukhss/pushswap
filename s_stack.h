@@ -6,7 +6,7 @@
 /*   By: iboukhss <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/25 19:45:33 by iboukhss          #+#    #+#             */
-/*   Updated: 2024/10/27 19:46:27 by iboukhss         ###   ########.fr       */
+/*   Updated: 2024/11/01 21:21:59 by iboukhss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,9 @@ void	stack_push_front_a(t_stack *stack, int value);
 void	stack_push_back_b(t_stack *stack, int value);
 void	stack_push_front_b(t_stack *stack, int value);
 
-int		stack_pop_back_a(int *out_val, t_stack *stack);
-int		stack_pop_front_a(int *out_val, t_stack *stack);
-int		stack_pop_back_b(int *out_val, t_stack *stack);
-int		stack_pop_front_b(int *out_val, t_stack *stack);
+int		stack_pop_back_a(t_stack *stack);
+int		stack_pop_front_a(t_stack *stack);
+int		stack_pop_back_b(t_stack *stack);
+int		stack_pop_front_b(t_stack *stack);
 
 #endif

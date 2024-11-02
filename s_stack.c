@@ -6,7 +6,7 @@
 /*   By: iboukhss <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/25 19:47:20 by iboukhss          #+#    #+#             */
-/*   Updated: 2024/10/27 19:20:49 by iboukhss         ###   ########.fr       */
+/*   Updated: 2024/11/01 21:59:35 by iboukhss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,19 +43,4 @@ void	stack_delete(t_stack *stack)
 {
 	free(stack->data);
 	free(stack);
-}
-
-bool	stack_is_full(t_stack *stack)
-{
-	return (stack->end_b - stack->beg_a == stack->cap);
-}
-
-bool	stack_is_empty_a(t_stack *stack)
-{
-	return (stack->end_a - stack->beg_a == 0);
-}
-
-bool	stack_is_empty_b(t_stack *stack)
-{
-	return (stack->end_b - stack->beg_b == 0);
 }
