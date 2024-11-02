@@ -6,7 +6,7 @@
 /*   By: iboukhss <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/25 20:02:51 by iboukhss          #+#    #+#             */
-/*   Updated: 2024/10/31 00:16:27 by iboukhss         ###   ########.fr       */
+/*   Updated: 2024/11/02 01:03:04 by iboukhss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,13 +75,19 @@ void	state_push_min(t_state *state);
 void	state_push_mid(t_state *state);
 void	state_push_max(t_state *state);
 
+void	state_pop_min(t_state *state);
+void	state_pop_mid(t_state *state);
+void	state_pop_max(t_state *state);
+
 // Chunk functions
+t_chunk	*chunk_at(t_state *state, t_position pos);
+
+bool	chunk_is_empty(t_state *state, t_position pos);
+bool	chunk_is_full(t_state *state);
+
 void	chunk_push(t_state *state, t_position pos);
 void	chunk_pop(t_state *state, t_position pos);
-
-t_chunk	*chunk_at(t_state *state, t_position pos);
-bool	chunk_is_empty(t_chunk *chunk);
-int		chunk_peek(t_chunk *chunk);
+int		chunk_data(t_chunk chunk);
 
 // Push_swap operations
 void	push_a(t_state *state);
