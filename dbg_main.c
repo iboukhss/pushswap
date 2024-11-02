@@ -6,13 +6,45 @@
 /*   By: iboukhss <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 23:06:03 by iboukhss          #+#    #+#             */
-/*   Updated: 2024/10/27 13:53:43 by iboukhss         ###   ########.fr       */
+/*   Updated: 2024/11/01 01:22:03 by iboukhss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "dbg_main.h"
 
 #include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+void	sequence_init(int *array, ptrdiff_t array_size)
+{
+	ptrdiff_t	i;
+
+	i = 0;
+	while (i < array_size)
+	{
+		array[i] = i + 1;
+		i++;
+	}
+}
+
+void	shuffle(int *array, ptrdiff_t array_size)
+{
+	ptrdiff_t	i;
+	ptrdiff_t	j;
+	int			tmp;
+
+	srand(42);
+	i = array_size - 1;
+	while (i > 0)
+	{
+		j = rand() % (i + 1);
+		tmp = array[i];
+		array[i] = array[j];
+		array[j] = tmp;
+		i--;
+	}
+}
 
 void	stack_print(t_stack *stack)
 {
@@ -39,24 +71,30 @@ void	stack_print(t_stack *stack)
 void	chunk_print(t_chunk *chunk, const char *chunk_name)
 {
 	int	*cp;
+	char loc[4][6] = {
+		"TOP_A",
+		"BOT_A",
+		"TOP_B",
+		"BOT_B",
+	};
 
-	printf("%s: ", chunk_name);
+	printf("%4s: ", chunk_name);
 	cp = chunk->beg;
 	while (cp < chunk->end)
 	{
 		printf("%d, ", *cp);
 		++cp;
 	}
-	printf("\nlen : %td\n", chunk->end - chunk->beg);
+	printf("(len = %td), ", chunk->len);
+	printf("(pos = %s)\n", loc[chunk->pos]);
 }
 
 void	state_print(t_state *state)
 {
-	printf("------------------------------------------------\n");
-	stack_print(state->stack);
+	printf("===========================================================\n");
 	chunk_print(&state->curr, "curr");
-	chunk_print(&state->min, "min ");
-	chunk_print(&state->mid, "mid ");
-	chunk_print(&state->max, "max ");
-	printf("------------------------------------------------\n");
+	chunk_print(&state->min, "min");
+	chunk_print(&state->mid, "mid");
+	chunk_print(&state->max, "max");
+	printf("===========================================================\n");
 }

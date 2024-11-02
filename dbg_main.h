@@ -6,7 +6,7 @@
 /*   By: iboukhss <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 23:06:17 by iboukhss          #+#    #+#             */
-/*   Updated: 2024/10/26 23:37:15 by iboukhss         ###   ########.fr       */
+/*   Updated: 2024/10/30 18:25:37 by iboukhss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,5 +18,8 @@
 void	stack_print(t_stack *stack);
 void	chunk_print(t_chunk *chunk, const char *chunk_name);
 void	state_print(t_state *state);
+
+void	sequence_init(int *array, ptrdiff_t array_size);
+void	shuffle(int *array, ptrdiff_t array_size);
 
 #endif
