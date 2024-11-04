@@ -6,7 +6,7 @@
 /*   By: iboukhss <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 19:18:02 by iboukhss          #+#    #+#             */
-/*   Updated: 2024/11/01 17:37:13 by iboukhss         ###   ########.fr       */
+/*   Updated: 2024/11/02 20:27:40 by iboukhss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ void	state_push_min(t_state *state)
 	{
 		reverse_rotate_b(state);
 	}
+	chunk_pop(state, state->curr.pos);
+	chunk_push(state, state->min.pos);
 }
 
 void	state_push_mid(t_state *state)
@@ -57,6 +59,8 @@ void	state_push_mid(t_state *state)
 		push_a(state);
 		rotate_a(state);
 	}
+	chunk_pop(state, state->curr.pos);
+	chunk_push(state, state->mid.pos);
 }
 
 void	state_push_max(t_state *state)
@@ -78,4 +82,6 @@ void	state_push_max(t_state *state)
 		reverse_rotate_b(state);
 		push_a(state);
 	}
+	chunk_pop(state, state->curr.pos);
+	chunk_push(state, state->max.pos);
 }
