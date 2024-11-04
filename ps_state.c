@@ -6,7 +6,7 @@
 /*   By: iboukhss <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 18:09:07 by iboukhss          #+#    #+#             */
-/*   Updated: 2024/11/02 00:42:13 by iboukhss         ###   ########.fr       */
+/*   Updated: 2024/11/04 00:37:11 by iboukhss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,8 +95,13 @@ static void	init_from_bot_b(t_state *state, t_stack *stack, ptrdiff_t len)
 void	state_init(t_state *state, t_stack *stack, t_position pos,
 			ptrdiff_t len)
 {
+	ptrdiff_t	len_a;
+	ptrdiff_t	len_b;
+
 	state->stack = stack;
-	if (pos == TOP_A)
+	len_a = stack->end_a - stack->beg_a;
+	len_b = stack->end_b - stack->beg_b;
+	if (pos == TOP_A || (pos == BOT_A && len == len_a))
 	{
 		init_from_top_a(state, stack, len);
 	}
@@ -104,7 +109,7 @@ void	state_init(t_state *state, t_stack *stack, t_position pos,
 	{
 		init_from_bot_a(state, stack, len);
 	}
-	else if (pos == TOP_B)
+	else if (pos == TOP_B || (pos == BOT_B && len == len_b))
 	{
 		init_from_top_b(state, stack, len);
 	}
