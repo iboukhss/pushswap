@@ -6,7 +6,7 @@
 /*   By: iboukhss <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 23:06:03 by iboukhss          #+#    #+#             */
-/*   Updated: 2024/11/01 01:22:03 by iboukhss         ###   ########.fr       */
+/*   Updated: 2024/11/02 16:43:06 by iboukhss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,27 @@ void	chunk_print(t_chunk *chunk, const char *chunk_name)
 	}
 	printf("(len = %td), ", chunk->len);
 	printf("(pos = %s)\n", loc[chunk->pos]);
+}
+
+void	sort_print(t_sort *sort)
+{
+	ptrdiff_t	i;
+
+	i = 0;
+	printf("***********************************************************\n");
+	printf("arr : ");
+	while (i < sort->size)
+	{
+		printf("%d, ", sort->arr[i]);
+		++i;
+	}
+	printf("\n");
+	printf("size: %td\n", sort->size);
+	printf("pi  : %td\n", sort->pi);
+	printf("qi  : %td\n", sort->qi);
+	printf("p   : %d\n", sort->p);
+	printf("q   : %d\n", sort->q);
+	printf("***********************************************************\n");
 }
 
 void	state_print(t_state *state)
