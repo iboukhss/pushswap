@@ -6,7 +6,7 @@
 /*   By: iboukhss <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/25 19:47:20 by iboukhss          #+#    #+#             */
-/*   Updated: 2024/11/05 22:58:04 by iboukhss         ###   ########.fr       */
+/*   Updated: 2024/11/06 14:22:23 by iboukhss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,13 @@ t_stack	*stack_new(int *array, ptrdiff_t array_size)
 	{
 		return (NULL);
 	}
-	stack->data = malloc(array_size * sizeof(*stack->data));
+	stack->data = malloc(array_size * sizeof(int));
 	if (stack->data == NULL)
 	{
 		free(stack);
 		return (NULL);
 	}
-	memcpy(stack->data, array, array_size * sizeof(*stack->data));
+	memcpy(stack->data, array, array_size * sizeof(int));
 	stack->beg_a = stack->data;
 	stack->end_a = stack->beg_a + array_size;
 	stack->beg_b = stack->end_a;
@@ -45,4 +45,19 @@ void	stack_delete(t_stack *stack)
 {
 	free(stack->data);
 	free(stack);
+}
+
+bool	stack_is_full(t_stack *stack)
+{
+	return (stack->len_a + stack->len_b == stack->cap);
+}
+
+bool	stack_is_empty_a(t_stack *stack)
+{
+	return (stack->len_a == 0);
+}
+
+bool	stack_is_empty_b(t_stack *stack)
+{
+	return (stack->len_b == 0);
 }

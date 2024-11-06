@@ -6,7 +6,7 @@
 /*   By: iboukhss <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 18:02:22 by iboukhss          #+#    #+#             */
-/*   Updated: 2024/11/02 01:54:35 by iboukhss         ###   ########.fr       */
+/*   Updated: 2024/11/05 14:16:38 by iboukhss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ bool	chunk_is_full(t_state *state)
 
 	total_len = state->curr.len + state->min.len;
 	total_len += state->mid.len + state->max.len;
-	return (total_len == state->stack->cap);
+	return (total_len == state->cap);
 }
 
 int		chunk_data(t_chunk chunk)
