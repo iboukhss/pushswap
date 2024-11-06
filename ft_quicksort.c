@@ -6,11 +6,11 @@
 /*   By: iboukhss <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/27 21:46:44 by iboukhss          #+#    #+#             */
-/*   Updated: 2024/10/27 22:09:09 by iboukhss         ###   ########.fr       */
+/*   Updated: 2024/11/06 19:32:07 by iboukhss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_main.h"
+#include "libft.h"
 
 static void	swap(int *a, int *b)
 {

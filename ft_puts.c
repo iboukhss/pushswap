@@ -1,20 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_main.h                                          :+:      :+:    :+:   */
+/*   ft_puts.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: iboukhss <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/27 21:47:26 by iboukhss          #+#    #+#             */
-/*   Updated: 2024/10/27 21:50:14 by iboukhss         ###   ########.fr       */
+/*   Created: 2024/11/06 14:49:01 by iboukhss          #+#    #+#             */
+/*   Updated: 2024/11/06 14:49:54 by iboukhss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_MAIN_H
-# define FT_MAIN_H
+#include "libft.h"
 
-# include <stddef.h>
-
-void	ft_quicksort(int *array, ptrdiff_t array_size);
-
-#endif
+int	ft_puts(const char *s)
+{
+	return (ft_printf("%s\n", s));
+}

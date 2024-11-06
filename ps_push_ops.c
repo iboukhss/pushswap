@@ -6,13 +6,13 @@
 /*   By: iboukhss <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 01:01:48 by iboukhss          #+#    #+#             */
-/*   Updated: 2024/11/05 14:28:19 by iboukhss         ###   ########.fr       */
+/*   Updated: 2024/11/06 14:51:52 by iboukhss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ps_main.h"
 
-#include <stdio.h>
+#include "libft.h"
 
 void	push_a(t_stack *stack)
 {
@@ -20,7 +20,7 @@ void	push_a(t_stack *stack)
 
 	val = stack_pop_front_b(stack);
 	stack_push_front_a(stack, val);
-	puts("pa");
+	ft_puts("pa");
 }
 
 void	push_b(t_stack *stack)
@@ -29,7 +29,7 @@ void	push_b(t_stack *stack)
 
 	val = stack_pop_front_a(stack);
 	stack_push_front_b(stack, val);
-	puts("pb");
+	ft_puts("pb");
 }
 
 void	swap_a(t_stack *stack)
@@ -41,7 +41,7 @@ void	swap_a(t_stack *stack)
 	val_b = stack_pop_front_a(stack);
 	stack_push_front_a(stack, val_a);
 	stack_push_front_a(stack, val_b);
-	puts("sa");
+	ft_puts("sa");
 }
 
 void	swap_b(t_stack *stack)
@@ -53,5 +53,5 @@ void	swap_b(t_stack *stack)
 	val_b = stack_pop_front_b(stack);
 	stack_push_front_b(stack, val_a);
 	stack_push_front_b(stack, val_b);
-	puts("sb");
+	ft_puts("sb");
 }

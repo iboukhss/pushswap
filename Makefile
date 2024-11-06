@@ -7,7 +7,7 @@ SRCS := ps_main.c dbg_main.c ps_sort.c \
         ps_chunk.c ps_chunk_push.c ps_chunk_pop.c \
         ps_push_ops.c ps_rotate_ops.c \
         ps_state.c ps_state_push.c ps_state_pop.c \
-        ft_quicksort.c \
+        ft_quicksort.c strv_split.c ft_puts.c ft_printf.c ft_atoi.c \
 
 INCS := ps_main.h s_stack.h
 
