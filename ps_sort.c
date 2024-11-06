@@ -6,7 +6,7 @@
 /*   By: iboukhss <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 18:40:23 by iboukhss          #+#    #+#             */
-/*   Updated: 2024/11/04 01:59:32 by iboukhss         ###   ########.fr       */
+/*   Updated: 2024/11/06 14:23:26 by iboukhss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,23 +24,29 @@ static void	find_pivots(t_sort *sort, int *array, ptrdiff_t array_size)
 		third = array_size / 3;
 		sort->arr = array;
 		sort->size = array_size;
-		sort->pi = third - 1;
-		sort->qi = third + third - 1;
+		if (array_size % 3 == 0 || array_size % 3 == 1)
+		{
+			sort->pi = third - 1;
+			sort->qi = third + third - 1;
+		}
+		else if (array_size % 3 == 2)
+		{
+			sort->pi = third;
+			sort->qi = third + third;
+		}
 		sort->p = array[sort->pi];
 		sort->q = array[sort->qi];
 	}
 	else
 	{
-		printf("*** PROBLEM HERE *** PROBLEM HERE *** PROBLEM HERE ***\n");
+		printf("****** PROBLEM HERE ******\n");
 	}
 }
 
-static void	qsort_recursive(t_state *state, t_sort *sort)
+static void	split_chunks(t_state *state, t_stack *stack, t_sort *sort)
 {
-	t_state	new_state;
-	t_sort	new_sort;
-
-	stack_print(state->stack);
+	printf("****** SPLIT CHUNKS ******\n");
+	stack_print(stack);
 	state_print(state);
 	sort_print(sort);
 
@@ -48,83 +54,106 @@ static void	qsort_recursive(t_state *state, t_sort *sort)
 	{
 		if (chunk_data(state->curr) <= sort->p)
 		{
-			state_push_min(state);
+			state_push_min(state, stack);
 		}
 		else if (chunk_data(state->curr) <= sort->q)
 		{
-			state_push_mid(state);
+			state_push_mid(state, stack);
 		}
 		else
 		{
-			state_push_max(state);
+			state_push_max(state, stack);
 		}
 	}
 
-	// Max chunk
+	stack_print(stack);
+	state_print(state);
+}
+
+static void	reinsert_max(t_state *state, t_stack *stack)
+{
+	printf("****** REINSERT MAX ******\n");
+	while (state->max.len > 0)
+	{
+		state_pop_max(state, stack);
+	}
+	if (stack->len_a >= 2)
+	{
+		if (*stack->beg_a > *(stack->beg_a + 1))
+		{
+			swap_a(stack);
+		}
+	}
+}
+
+static void	reinsert_mid(t_state *state, t_stack *stack)
+{
+	printf("****** REINSERT MID ******\n");
+	while (state->mid.len > 0)
+	{
+		state_pop_mid(state, stack);
+	}
+	if (stack->len_a >= 2)
+	{
+		if (*stack->beg_a > *(stack->beg_a + 1))
+		{
+			swap_a(stack);
+		}
+	}
+}
+
+static void	reinsert_min(t_state *state, t_stack *stack)
+{
+	printf("****** REINSERT MIN ******\n");
+	while (state->min.len > 0)
+	{
+		state_pop_min(state, stack);
+	}
+	if (stack->len_a >= 2)
+	{
+		if (*stack->beg_a > *(stack->beg_a + 1))
+		{
+			swap_a(stack);
+		}
+	}
+}
+
+static void	qsort_recursive(t_stack *stack, t_state *state, t_sort *sort)
+{
+	t_state	new_state;
+	t_sort	new_sort;
+
+	split_chunks(state, stack, sort);
 	if (state->max.len >= 3)
 	{
-		printf("****** MAX CHUNK *** MAX CHUNK *** MAX CHUNK ******\n");
-		state_init(&new_state, state->stack, state->max.pos, state->max.len);
+		state_init(&new_state, stack, state->max.len, state->max.pos);
 		find_pivots(&new_sort, &sort->arr[sort->qi + 1], state->max.len);
-		qsort_recursive(&new_state, &new_sort);
+		qsort_recursive(stack, &new_state, &new_sort);
 	}
-
-	// Mid chunk
+	else
+	{
+		reinsert_max(state, stack);
+	}
 	if (state->mid.len >= 3)
 	{
-		printf("****** MID CHUNK *** MID CHUNK *** MID CHUNK ******\n");
-		state_init(&new_state, state->stack, state->mid.pos, state->mid.len);
+		state_init(&new_state, stack, state->mid.len, state->mid.pos);
 		find_pivots(&new_sort, &sort->arr[sort->pi + 1], state->mid.len);
-		qsort_recursive(&new_state, &new_sort);
+		qsort_recursive(stack, &new_state, &new_sort);
 	}
-
-	// Min chunk
+	else
+	{
+		reinsert_mid(state, stack);
+	}
 	if (state->min.len >= 3)
 	{
-		printf("****** MIN CHUNK *** MIN CHUNK *** MIN CHUNK ******\n");
-		state_init(&new_state, state->stack, state->min.pos, state->min.len);
+		state_init(&new_state, stack, state->min.len, state->min.pos);
 		find_pivots(&new_sort, sort->arr, state->min.len);
-		qsort_recursive(&new_state, &new_sort);
+		qsort_recursive(stack, &new_state, &new_sort);
 	}
-
-	printf("****** SIMPLE SORTING ******\n");
-	stack_print(state->stack);
-	state_print(state);
-
-	if (state->curr.pos == TOP_A || state->curr.pos == BOT_A)
+	else
 	{
-		while (state->max.len > 0)
-		{
-			state_pop_max(state);
-		}
-		while (state->mid.len > 0)
-		{
-			state_pop_mid(state);
-		}
-		while (state->min.len > 0)
-		{
-			state_pop_min(state);
-		}
+		reinsert_min(state, stack);
 	}
-
-	else if (state->curr.pos == TOP_B || state->curr.pos == BOT_B)
-	{
-		while (state->min.len > 0)
-		{
-			state_pop_min(state);
-		}
-		while (state->mid.len > 0)
-		{
-			state_pop_mid(state);
-		}
-		while (state->max.len > 0)
-		{
-			state_pop_max(state);
-		}
-	}
-
-	stack_print(state->stack);
-	state_print(state);
 }
 
 void	stack_qsort(t_stack *stack, int *array, ptrdiff_t array_size)
@@ -132,12 +161,15 @@ void	stack_qsort(t_stack *stack, int *array, ptrdiff_t array_size)
 	t_state	state;
 	t_sort	sort;
 
-	state_init(&state, stack, TOP_A, stack->cap);
+	state_init(&state, stack, stack->cap, TOP_A);
 	ft_quicksort(array, array_size);
 	find_pivots(&sort, array, array_size);
-	qsort_recursive(&state, &sort);
 
-	stack_print(stack);
-	state_print(&state);
-	sort_print(&sort);
+	//stack_print(stack);
+
+	qsort_recursive(stack, &state, &sort);
+
+	//stack_print(stack);
+	//state_print(&state);
+	//sort_print(&sort);
 }

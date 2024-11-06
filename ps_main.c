@@ -6,11 +6,11 @@
 /*   By: iboukhss <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/25 19:45:25 by iboukhss          #+#    #+#             */
-/*   Updated: 2024/11/04 02:03:13 by iboukhss         ###   ########.fr       */
+/*   Updated: 2024/11/06 11:55:30 by iboukhss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#define STACK_SIZE 50
+#define STACK_SIZE 27
 
 #include "ps_main.h"
 #include "dbg_main.h"
