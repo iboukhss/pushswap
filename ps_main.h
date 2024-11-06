@@ -6,7 +6,7 @@
 /*   By: iboukhss <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/25 20:02:51 by iboukhss          #+#    #+#             */
-/*   Updated: 2024/11/02 01:03:04 by iboukhss         ###   ########.fr       */
+/*   Updated: 2024/11/05 22:43:27 by iboukhss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,11 +51,11 @@ typedef struct s_chunk
 // State handle for partitioning
 typedef struct s_state
 {
-	t_stack	*stack;
-	t_chunk	curr;
-	t_chunk	min;
-	t_chunk	mid;
-	t_chunk	max;
+	t_chunk		curr;
+	t_chunk		min;
+	t_chunk		mid;
+	t_chunk		max;
+	ptrdiff_t	cap;
 }	t_state;
 
 typedef struct s_sort
@@ -68,16 +68,27 @@ typedef struct s_sort
 	int			q;
 }	t_sort;
 
-// State operations
-void	state_init(t_state *state, t_stack *stack, t_position pos,
-			ptrdiff_t len);
-void	state_push_min(t_state *state);
-void	state_push_mid(t_state *state);
-void	state_push_max(t_state *state);
+// Push_swap operations
+void	push_a(t_stack *stack);
+void	push_b(t_stack *stack);
+void	swap_a(t_stack *stack);
+void	swap_b(t_stack *stack);
+void	rotate_a(t_stack *stack);
+void	rotate_b(t_stack *stack);
+void	reverse_rotate_a(t_stack *stack);
+void	reverse_rotate_b(t_stack *stack);
 
-void	state_pop_min(t_state *state);
-void	state_pop_mid(t_state *state);
-void	state_pop_max(t_state *state);
+// State operations
+
+void	state_init(t_state *state, t_stack *stack, ptrdiff_t len, t_position pos);
+
+void	state_push_min(t_state *state, t_stack *stack);
+void	state_push_mid(t_state *state, t_stack *stack);
+void	state_push_max(t_state *state, t_stack *stack);
+
+void	state_pop_min(t_state *state, t_stack *stack);
+void	state_pop_mid(t_state *state, t_stack *stack);
+void	state_pop_max(t_state *state, t_stack *stack);
 
 // Chunk functions
 t_chunk	*chunk_at(t_state *state, t_position pos);
@@ -89,13 +100,6 @@ void	chunk_push(t_state *state, t_position pos);
 void	chunk_pop(t_state *state, t_position pos);
 int		chunk_data(t_chunk chunk);
 
-// Push_swap operations
-void	push_a(t_state *state);
-void	push_b(t_state *state);
-void	rotate_a(t_state *state);
-void	rotate_b(t_state *state);
-void	reverse_rotate_a(t_state *state);
-void	reverse_rotate_b(t_state *state);
 
 // Sorting
 void	ft_quicksort(int *array, ptrdiff_t array_size);

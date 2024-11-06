@@ -6,7 +6,7 @@
 /*   By: iboukhss <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/25 19:45:33 by iboukhss          #+#    #+#             */
-/*   Updated: 2024/11/01 21:21:59 by iboukhss         ###   ########.fr       */
+/*   Updated: 2024/11/05 21:15:53 by iboukhss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ typedef struct s_stack
 	int			*end_a;
 	int			*beg_b;
 	int			*end_b;
+	ptrdiff_t	len_a;
+	ptrdiff_t	len_b;
 	ptrdiff_t	cap;
 }	t_stack;
 

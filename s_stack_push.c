@@ -6,7 +6,7 @@
 /*   By: iboukhss <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/25 20:12:25 by iboukhss          #+#    #+#             */
-/*   Updated: 2024/10/27 19:41:46 by iboukhss         ###   ########.fr       */
+/*   Updated: 2024/11/06 06:32:23 by iboukhss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,11 @@ void	stack_push_back_a(t_stack *stack, int value)
 	{
 		return ;
 	}
-	move_size = (stack->end_b - stack->beg_b) * sizeof(*stack->data);
+	move_size = stack->len_b * sizeof(int);
 	memmove(stack->beg_b + 1, stack->beg_b, move_size);
 	*(stack->end_a) = value;
 	stack->end_a += 1;
+	stack->len_a += 1;
 	stack->beg_b += 1;
 	stack->end_b += 1;
 }
@@ -38,10 +39,11 @@ void	stack_push_front_a(t_stack *stack, int value)
 	{
 		return ;
 	}
-	move_size = (stack->end_b - stack->beg_a) * sizeof(*stack->data);
+	move_size = (stack->len_a + stack->len_b) * sizeof(int);
 	memmove(stack->beg_a + 1, stack->beg_a, move_size);
 	*(stack->beg_a) = value;
 	stack->end_a += 1;
+	stack->len_a += 1;
 	stack->beg_b += 1;
 	stack->end_b += 1;
 }
@@ -54,6 +56,7 @@ void	stack_push_back_b(t_stack *stack, int value)
 	}
 	*(stack->end_b) = value;
 	stack->end_b += 1;
+	stack->len_b += 1;
 }
 
 void	stack_push_front_b(t_stack *stack, int value)
@@ -64,8 +67,9 @@ void	stack_push_front_b(t_stack *stack, int value)
 	{
 		return ;
 	}
-	move_size = (stack->end_b - stack->beg_b) * sizeof(*stack->data);
+	move_size = stack->len_b * sizeof(int);
 	memmove(stack->beg_b + 1, stack->beg_b, move_size);
 	*(stack->beg_b) = value;
 	stack->end_b += 1;
+	stack->len_b += 1;
 }

@@ -6,7 +6,7 @@
 /*   By: iboukhss <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/25 19:47:20 by iboukhss          #+#    #+#             */
-/*   Updated: 2024/11/01 21:59:35 by iboukhss         ###   ########.fr       */
+/*   Updated: 2024/11/05 22:58:04 by iboukhss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,11 @@ t_stack	*stack_new(int *array, ptrdiff_t array_size)
 	}
 	memcpy(stack->data, array, array_size * sizeof(*stack->data));
 	stack->beg_a = stack->data;
-	stack->end_a = stack->data + array_size;
-	stack->beg_b = stack->data + array_size;
-	stack->end_b = stack->data + array_size;
+	stack->end_a = stack->beg_a + array_size;
+	stack->beg_b = stack->end_a;
+	stack->end_b = stack->beg_b + 0;
+	stack->len_a = stack->end_a - stack->beg_a;
+	stack->len_b = stack->end_b - stack->beg_b;
 	stack->cap = array_size;
 	return (stack);
 }
