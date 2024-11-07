@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: iboukhss <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/06 18:36:01 by iboukhss          #+#    #+#             */
-/*   Updated: 2024/11/06 19:04:51 by iboukhss         ###   ########.fr       */
+/*   Created: 2024/11/07 06:02:49 by iboukhss          #+#    #+#             */
+/*   Updated: 2024/11/07 07:40:20 by iboukhss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,32 @@ static char	*ft_strndup(const char *str, ptrdiff_t n)
 	return (dup);
 }
 
+static void	parse_string(t_strv *strs, const char *str, int delim)
+{
+	const char	*beg;
+	const char	*end;
+	ptrdiff_t	i;
+
+	i = 0;
+	while (*str && i < strs->cap)
+	{
+		while (*str && *str == delim)
+		{
+			++str;
+		}
+		if (*str != '\0')
+		{
+			beg = str;
+			while (*str && *str != delim)
+			{
+				++str;
+			}
+			end = str;
+			strs->data[i++] = ft_strndup(beg, end - beg);
+		}
+	}
+}
+
 static ptrdiff_t	count_tokens(const char *str, int delim)
 {
 	ptrdiff_t	count;
@@ -60,64 +86,40 @@ static ptrdiff_t	count_tokens(const char *str, int delim)
 	return (count);
 }
 
-// NOTE: Assume strndup never fails because I refuse to compromise on my style
-// to fit less than 25 LOC.
-static char	**parse_string(char **arr, ptrdiff_t arr_size, const char *str,
-				int delim)
+t_strv	*strv_split(const char *str, int delim)
 {
-	const char	*beg;
-	const char	*end;
-	ptrdiff_t	i;
-
-	i = 0;
-	while (*str && i < arr_size)
-	{
-		while (*str && *str == delim)
-		{
-			++str;
-		}
-		if (*str != 0)
-		{
-			beg = str;
-			while (*str && *str != delim)
-			{
-				++str;
-			}
-			end = str;
-			arr[i++] = ft_strndup(beg, end - beg);
-		}
-	}
-	arr[i] = NULL;
-	return (arr);
-}
-
-char	**strv_split(const char *str, int delim)
-{
+	t_strv		*strs;
 	ptrdiff_t	count;
-	char		**strs;
+	char		**tokens;
 
-	count = count_tokens(str, delim);
-	strs = malloc((count + 1) * sizeof(char *));
+	strs = malloc(sizeof(*strs));
 	if (strs == NULL)
 	{
 		return (NULL);
 	}
-	return (parse_string(strs, count, str, delim));
+	count = count_tokens(str, delim);
+	tokens = malloc(count * sizeof(*tokens));
+	if (tokens == NULL)
+	{
+		free(strs);
+		return (NULL);
+	}
+	strs->data = tokens;
+	strs->cap = count;
+	parse_string(strs, str, delim);
+	return (strs);
 }
 
-void	strv_free(char **strs)
+void	strv_delete(t_strv *strs)
 {
 	ptrdiff_t	i;
 
 	i = 0;
-	if (strs != NULL)
+	while (i < strs->cap)
 	{
-		while (strs[i] != NULL)
-		{
-			free(strs[i++]);
-		}
-		free(strs);
+		free(strs->data[i++]);
 	}
+	free(strs);
 }
 
 /*
@@ -131,11 +133,12 @@ int	main(int argc, char **argv)
 	}
 	printf("argv[1]: %s\n", argv[1]);
 
-	char **args = strv_split(argv[1], ' ');
-	for (ptrdiff_t i = 0; args[i] != NULL; i++)
+	t_strv *strs = strv_split(argv[1], ' ');
+	for (ptrdiff_t i = 0; i < strs->cap; i++)
 	{
-		printf("%td: %s\n", i, args[i]);
+		printf("%td: %s\n", i, strs->data[i]);
 	}
+	strv_delete(strs);
 	return (0);
 }
 */
