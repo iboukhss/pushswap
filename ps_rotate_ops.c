@@ -6,7 +6,7 @@
 /*   By: iboukhss <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 02:56:31 by iboukhss          #+#    #+#             */
-/*   Updated: 2024/11/06 14:52:21 by iboukhss         ###   ########.fr       */
+/*   Updated: 2024/11/09 02:48:36 by iboukhss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,34 +18,46 @@ void	rotate_a(t_stack *stack)
 {
 	int	val;
 
-	val = stack_pop_front_a(stack);
-	stack_push_back_a(stack, val);
-	ft_puts("ra");
+	if (stack->len_a > 1)
+	{
+		val = stack_pop_front_a(stack);
+		stack_push_back_a(stack, val);
+		ft_puts("ra");
+	}
 }
 
 void	rotate_b(t_stack *stack)
 {
 	int	val;
 
-	val = stack_pop_front_b(stack);
-	stack_push_back_b(stack, val);
-	ft_puts("rb");
+	if (stack->len_b > 1)
+	{
+		val = stack_pop_front_b(stack);
+		stack_push_back_b(stack, val);
+		ft_puts("rb");
+	}
 }
 
 void	reverse_rotate_a(t_stack *stack)
 {
 	int	val;
 
-	val = stack_pop_back_a(stack);
-	stack_push_front_a(stack, val);
-	ft_puts("rra");
+	if (stack->len_a > 1)
+	{
+		val = stack_pop_back_a(stack);
+		stack_push_front_a(stack, val);
+		ft_puts("rra");
+	}
 }
 
 void	reverse_rotate_b(t_stack *stack)
 {
 	int	val;
 
-	val = stack_pop_back_b(stack);
-	stack_push_front_b(stack, val);
-	ft_puts("rrb");
+	if (stack->len_b > 1)
+	{
+		val = stack_pop_back_b(stack);
+		stack_push_front_b(stack, val);
+		ft_puts("rrb");
+	}
 }
