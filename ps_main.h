@@ -6,7 +6,7 @@
 /*   By: iboukhss <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/25 20:02:51 by iboukhss          #+#    #+#             */
-/*   Updated: 2024/11/05 22:43:27 by iboukhss         ###   ########.fr       */
+/*   Updated: 2024/11/09 18:02:36 by iboukhss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,6 @@ void	reverse_rotate_a(t_stack *stack);
 void	reverse_rotate_b(t_stack *stack);
 
 // State operations
-
 void	state_init(t_state *state, t_stack *stack, ptrdiff_t len, t_position pos);
 
 void	state_push_min(t_state *state, t_stack *stack);
@@ -98,11 +97,10 @@ bool	chunk_is_full(t_state *state);
 
 void	chunk_push(t_state *state, t_position pos);
 void	chunk_pop(t_state *state, t_position pos);
+
 int		chunk_data(t_chunk chunk);
 
-
 // Sorting
-void	ft_quicksort(int *array, ptrdiff_t array_size);
 void	stack_qsort(t_stack *stack, int *array, ptrdiff_t array_size);
 
 #endif

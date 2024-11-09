@@ -6,55 +6,39 @@
 /*   By: iboukhss <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/25 19:45:25 by iboukhss          #+#    #+#             */
-/*   Updated: 2024/11/06 19:54:34 by iboukhss         ###   ########.fr       */
+/*   Updated: 2024/11/09 18:00:36 by iboukhss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#define STACK_SIZE 27
 
 #include "ps_main.h"
 #include "dbg_main.h"
 
 #include "libft.h"
-#include <stdlib.h>
+
+#include <unistd.h>
 
 int	main(int argc, char **argv)
 {
-	char	**args;
-	int		*ints;
+	t_stack	*stack;
+	t_intv	*nums;
 
 	if (argc < 2)
 	{
 		return (1);
 	}
-	else if (argc == 2)
+	if (stack_init_from_args(&stack, &nums, argv, argc) != 0)
 	{
+		write(STDERR_FILENO, "Error\n", 6);
 		return (1);
 	}
-	else
-	{
-		ints = malloc((argc - 1) * sizeof(*ints));
-	}
-	for (ptrdiff_t i = 0; i + 1 < argc; i++)
-	{
-		int err = ft_atoi(&ints[i], argv[i + 1]);
-		if (err)
-		{
-			return (1);
-		}
-	}
-	//int nums[STACK_SIZE];
-	//sequence_init(nums, STACK_SIZE);
-	//shuffle(nums, STACK_SIZE);
 
-	t_stack *stk = stack_new(ints, argc - 1);
+	//stack_print(stack);
 
-	//stack_print(stk);
+	stack_qsort(stack, nums->data, nums->len);
 
-	stack_qsort(stk, ints, argc - 1);
+	//stack_print(stack);
 
-	//stack_print(stk);
-
-	free(ints);
-	stack_delete(stk);
+	intv_delete(nums);
+	stack_delete(stack);
+	return (0);
 }
