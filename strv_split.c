@@ -6,120 +6,103 @@
 /*   By: iboukhss <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 06:02:49 by iboukhss          #+#    #+#             */
-/*   Updated: 2024/11/07 07:40:20 by iboukhss         ###   ########.fr       */
+/*   Updated: 2024/11/09 16:17:15 by iboukhss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
 #include <stdlib.h>
-#include <string.h>
 
-static char	*ft_strndup(const char *str, ptrdiff_t n)
+void	strv_delete(t_strv *strv)
 {
-	const char	*end;
-	const char	*max;
-	char		*dup;
-
-	end = str;
-	max = str + n;
-	while (*end && end < max)
-	{
-		++end;
-	}
-	dup = malloc((end - str + 1) * sizeof(*dup));
-	if (dup == NULL)
-	{
-		return (NULL);
-	}
-	memcpy(dup, str, end - str);
-	dup[end - str] = '\0';
-	return (dup);
-}
-
-static void	parse_string(t_strv *strs, const char *str, int delim)
-{
-	const char	*beg;
-	const char	*end;
 	ptrdiff_t	i;
 
 	i = 0;
-	while (*str && i < strs->cap)
+	while (i < strv->len)
 	{
-		while (*str && *str == delim)
-		{
-			++str;
-		}
-		if (*str != '\0')
-		{
-			beg = str;
-			while (*str && *str != delim)
-			{
-				++str;
-			}
-			end = str;
-			strs->data[i++] = ft_strndup(beg, end - beg);
-		}
+		free(strv->data[i++]);
 	}
+	free(strv->data);
+	free(strv);
 }
 
-static ptrdiff_t	count_tokens(const char *str, int delim)
+static ptrdiff_t	get_next_token(char **tok, char **pos, int delim)
 {
-	ptrdiff_t	count;
+	const char	*beg;
+	const char	*end;
 
-	count = 0;
-	while (*str)
+	beg = *pos;
+	while (*beg && *beg == delim)
 	{
-		while (*str && *str == delim)
-		{
-			++str;
-		}
-		if (*str != '\0')
-		{
-			count += 1;
-			while (*str && *str != delim)
-			{
-				++str;
-			}
-		}
+		beg++;
 	}
-	return (count);
+	if (*beg == '\0')
+	{
+		*pos = (char *)beg;
+		return (-1);
+	}
+	end = beg;
+	while (*end && *end != delim)
+	{
+		end++;
+	}
+	*tok = ft_strndup(beg, end - beg);
+	*pos = (char *)end;
+	return (end - beg);
+}
+
+static t_strv	*tokenize_string(t_strv *strv, const char *str, int delim)
+{
+	char		*token;
+	char		*pos;
+	ptrdiff_t	old_size;
+	void		*new_data;
+
+	pos = (char *)str;
+	while (get_next_token(&token, &pos, delim) > 0)
+	{
+		if (token == NULL)
+		{
+			strv_delete(strv);
+			return (NULL);
+		}
+		if (strv->len + 1 >= strv->cap)
+		{
+			old_size = strv->cap * sizeof(*strv->data);
+			new_data = ft_realloc(strv->data, old_size, old_size * 2);
+			if (new_data == NULL)
+			{
+				strv_delete(strv);
+				return (NULL);
+			}
+			strv->data = new_data;
+			strv->cap *= 2;
+		}
+		strv->data[strv->len++] = token;
+	}
+	strv->data[strv->len] = NULL;
+	return (strv);
 }
 
 t_strv	*strv_split(const char *str, int delim)
 {
-	t_strv		*strs;
-	ptrdiff_t	count;
-	char		**tokens;
+	t_strv	*strv;
 
-	strs = malloc(sizeof(*strs));
-	if (strs == NULL)
+	strv = malloc(sizeof(*strv));
+	if (strv == NULL)
 	{
 		return (NULL);
 	}
-	count = count_tokens(str, delim);
-	tokens = malloc(count * sizeof(*tokens));
-	if (tokens == NULL)
+	strv->len = 0;
+	strv->cap = 4;
+	strv->data = malloc(strv->cap * sizeof(*strv->data));
+	if (strv->data == NULL)
 	{
-		free(strs);
+		free(strv);
 		return (NULL);
 	}
-	strs->data = tokens;
-	strs->cap = count;
-	parse_string(strs, str, delim);
-	return (strs);
-}
-
-void	strv_delete(t_strv *strs)
-{
-	ptrdiff_t	i;
-
-	i = 0;
-	while (i < strs->cap)
-	{
-		free(strs->data[i++]);
-	}
-	free(strs);
+	return (tokenize_string(strv, str, delim));
 }
 
 /*
@@ -131,14 +114,17 @@ int	main(int argc, char **argv)
 	{
 		return (1);
 	}
-	printf("argv[1]: %s\n", argv[1]);
-
-	t_strv *strs = strv_split(argv[1], ' ');
-	for (ptrdiff_t i = 0; i < strs->cap; i++)
+	t_strv *toks = strv_split(argv[1], ' ');
+	if (toks == NULL)
 	{
-		printf("%td: %s\n", i, strs->data[i]);
+		return (1);
 	}
-	strv_delete(strs);
+	for (ptrdiff_t i = 0; i <= toks->len; i++)
+	{
+		printf("%td: %s\n", i, toks->data[i]);
+	}
+	printf("Capacity (%td / %td)\n", toks->len, toks->cap);
+	strv_delete(toks);
 	return (0);
 }
 */
