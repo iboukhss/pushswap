@@ -6,7 +6,7 @@
 /*   By: iboukhss <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/25 19:45:33 by iboukhss          #+#    #+#             */
-/*   Updated: 2024/11/09 20:44:40 by iboukhss         ###   ########.fr       */
+/*   Updated: 2024/11/10 20:48:08 by iboukhss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,8 @@ typedef struct s_stack
 t_stack	*stack_new(int *array, ptrdiff_t array_size);
 void	stack_delete(t_stack *stack);
 
-int		stack_init_from_args(t_stack **stack, t_intv **nums, char **argv, int argc);
+int		stack_init_from_args(t_stack **stack, t_intv **nums, char **argv,
+			int argc);
 
 // Peek functions
 bool	stack_is_full(t_stack *stack);
@@ -45,6 +46,8 @@ bool	stack_is_empty_b(t_stack *stack);
 // Not used
 int		stack_front_a(t_stack *stack);
 int		stack_front_b(t_stack *stack);
+int		stack_back_a(t_stack *stack);
+int		stack_back_b(t_stack *stack);
 
 // Push operations
 void	stack_push_back_a(t_stack *stack, int value);

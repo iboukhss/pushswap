@@ -6,7 +6,7 @@
 /*   By: iboukhss <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 06:02:49 by iboukhss          #+#    #+#             */
-/*   Updated: 2024/11/09 16:17:15 by iboukhss         ###   ########.fr       */
+/*   Updated: 2024/11/10 20:47:23 by iboukhss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,11 +62,6 @@ static t_strv	*tokenize_string(t_strv *strv, const char *str, int delim)
 	pos = (char *)str;
 	while (get_next_token(&token, &pos, delim) > 0)
 	{
-		if (token == NULL)
-		{
-			strv_delete(strv);
-			return (NULL);
-		}
 		if (strv->len + 1 >= strv->cap)
 		{
 			old_size = strv->cap * sizeof(*strv->data);

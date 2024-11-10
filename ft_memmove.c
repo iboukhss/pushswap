@@ -1,36 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ps_main.c                                          :+:      :+:    :+:   */
+/*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: iboukhss <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/25 19:45:25 by iboukhss          #+#    #+#             */
-/*   Updated: 2024/11/10 18:56:15 by iboukhss         ###   ########.fr       */
+/*   Created: 2024/11/10 20:52:55 by iboukhss          #+#    #+#             */
+/*   Updated: 2024/11/10 21:05:31 by iboukhss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ps_main.h"
 #include "libft.h"
 
-#include <unistd.h>
-
-int	main(int argc, char **argv)
+// NOTE: First case is essentially memcpy.
+void	*ft_memmove(void *dst, const void *src, ptrdiff_t n)
 {
-	t_stack	*stack;
-	t_intv	*nums;
+	char		*dp;
+	const char	*sp;
 
-	if (argc < 2)
+	dp = dst;
+	sp = src;
+	if (dp < sp)
 	{
-		return (1);
+		while (n > 0)
+		{
+			*dp++ = *sp++;
+			n--;
+		}
 	}
-	if (stack_init_from_args(&stack, &nums, argv, argc) != 0)
+	else
 	{
-		write(STDERR_FILENO, "Error\n", 6);
-		return (1);
+		dp += n;
+		sp += n;
+		while (n > 0)
+		{
+			*--dp = *--sp;
+			n--;
+		}
 	}
-	stack_qsort(stack, nums->data, nums->len);
-	intv_delete(nums);
-	stack_delete(stack);
-	return (0);
+	return (dst);
 }

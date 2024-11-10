@@ -6,7 +6,7 @@
 /*   By: iboukhss <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 23:06:03 by iboukhss          #+#    #+#             */
-/*   Updated: 2024/11/02 16:43:06 by iboukhss         ###   ########.fr       */
+/*   Updated: 2024/11/10 19:17:15 by iboukhss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,8 +70,8 @@ void	stack_print(t_stack *stack)
 
 void	chunk_print(t_chunk *chunk, const char *chunk_name)
 {
-	int	*cp;
-	char loc[4][6] = {
+	int					*cp;
+	const char			loc[4][6] = {
 		"TOP_A",
 		"BOT_A",
 		"TOP_B",

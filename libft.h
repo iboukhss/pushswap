@@ -6,7 +6,7 @@
 /*   By: iboukhss <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 14:45:41 by iboukhss          #+#    #+#             */
-/*   Updated: 2024/11/09 20:39:07 by iboukhss         ###   ########.fr       */
+/*   Updated: 2024/11/10 22:23:12 by iboukhss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,11 @@ int		ft_puts(const char *s);
 
 // Memory
 void	*ft_memcpy(void *dst, const void *src, ptrdiff_t n);
+void	*ft_memmove(void *dst, const void *src, ptrdiff_t n);
 void	*ft_realloc(void *ptr, ptrdiff_t old_size, ptrdiff_t new_size);
 
 // Strings
+char	*ft_strdup(const char *str);
 char	*ft_strndup(const char *str, ptrdiff_t n);
 
 // Other

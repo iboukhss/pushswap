@@ -1,36 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ps_main.c                                          :+:      :+:    :+:   */
+/*   s_stack_peek.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: iboukhss <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/25 19:45:25 by iboukhss          #+#    #+#             */
-/*   Updated: 2024/11/10 18:56:15 by iboukhss         ###   ########.fr       */
+/*   Created: 2024/11/09 21:01:36 by iboukhss          #+#    #+#             */
+/*   Updated: 2024/11/09 21:03:37 by iboukhss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ps_main.h"
-#include "libft.h"
+#include "s_stack.h"
 
-#include <unistd.h>
-
-int	main(int argc, char **argv)
+int	stack_front_a(t_stack *stack)
 {
-	t_stack	*stack;
-	t_intv	*nums;
+	return (*stack->beg_a);
+}
 
-	if (argc < 2)
-	{
-		return (1);
-	}
-	if (stack_init_from_args(&stack, &nums, argv, argc) != 0)
-	{
-		write(STDERR_FILENO, "Error\n", 6);
-		return (1);
-	}
-	stack_qsort(stack, nums->data, nums->len);
-	intv_delete(nums);
-	stack_delete(stack);
-	return (0);
+int	stack_front_b(t_stack *stack)
+{
+	return (*stack->beg_b);
+}
+
+int	stack_back_a(t_stack *stack)
+{
+	return (*(stack->end_a - 1));
+}
+
+int	stack_back_b(t_stack *stack)
+{
+	return (*(stack->end_b - 1));
 }

@@ -6,7 +6,7 @@
 /*   By: iboukhss <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 18:09:07 by iboukhss          #+#    #+#             */
-/*   Updated: 2024/11/06 10:45:44 by iboukhss         ###   ########.fr       */
+/*   Updated: 2024/11/10 20:46:44 by iboukhss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,8 @@ static void	init_from_bot_b(t_state *state, t_stack *stack, ptrdiff_t len)
 	state->max.len = 0;
 }
 
-void	state_init(t_state *state, t_stack *stack, ptrdiff_t len, t_position pos)
+void	state_init(t_state *state, t_stack *stack, ptrdiff_t len,
+			t_position pos)
 {
 	state->cap = len;
 	if (pos == TOP_A || (pos == BOT_A && len == stack->len_a))

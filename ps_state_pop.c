@@ -6,7 +6,7 @@
 /*   By: iboukhss <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 14:12:57 by iboukhss          #+#    #+#             */
-/*   Updated: 2024/11/06 12:41:43 by iboukhss         ###   ########.fr       */
+/*   Updated: 2024/11/10 19:13:27 by iboukhss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	state_pop_max(t_state *state, t_stack *stack)
 {
 	if (state->max.pos == TOP_A)
 	{
-		;
+		(void)0;
 	}
 	else if (state->max.pos == BOT_A)
 	{

@@ -1,36 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ps_main.c                                          :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: iboukhss <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/25 19:45:25 by iboukhss          #+#    #+#             */
-/*   Updated: 2024/11/10 18:56:15 by iboukhss         ###   ########.fr       */
+/*   Created: 2024/11/10 22:23:29 by iboukhss          #+#    #+#             */
+/*   Updated: 2024/11/10 22:27:20 by iboukhss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ps_main.h"
 #include "libft.h"
 
-#include <unistd.h>
+#include <stdlib.h>
 
-int	main(int argc, char **argv)
+static ptrdiff_t	ft_strlen(const char *s)
 {
-	t_stack	*stack;
-	t_intv	*nums;
+	const char	*end;
 
-	if (argc < 2)
+	end = s;
+	while (*end)
 	{
-		return (1);
+		++end;
 	}
-	if (stack_init_from_args(&stack, &nums, argv, argc) != 0)
+	return (end - s);
+}
+
+char	*ft_strdup(const char *str)
+{
+	ptrdiff_t	len;
+	char		*dup;
+
+	len = ft_strlen(str);
+	dup = malloc((len + 1) * sizeof(*dup));
+	if (dup == NULL)
 	{
-		write(STDERR_FILENO, "Error\n", 6);
-		return (1);
+		return (NULL);
 	}
-	stack_qsort(stack, nums->data, nums->len);
-	intv_delete(nums);
-	stack_delete(stack);
-	return (0);
+	return (ft_memcpy(dup, str, len + 1));
 }
