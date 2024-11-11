@@ -6,7 +6,7 @@
 /*   By: iboukhss <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 18:40:23 by iboukhss          #+#    #+#             */
-/*   Updated: 2024/11/10 19:05:58 by iboukhss         ###   ########.fr       */
+/*   Updated: 2024/11/11 14:48:40 by iboukhss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,10 @@ void	stack_qsort(t_stack *stack, int *array, ptrdiff_t array_size)
 	t_state	state;
 	t_sort	sort;
 
+	if (stack_is_sorted_a(stack))
+	{
+		return ;
+	}
 	state_init(&state, stack, stack->cap, TOP_A);
 	ft_quicksort(array, array_size);
 	find_pivots(&sort, array, array_size);
